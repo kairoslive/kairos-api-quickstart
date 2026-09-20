@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: Kairos API Quickstart
+message: >-
+  Getting started with API trading on Kairos. Facts in this repository are derived from
+  the Kairos OpenAPI specifications published at https://app.kairos.trade/openapi/ and
+  are re-verified against them by scheduled CI.
+type: software
+authors:
+  - name: Kairos
+    website: "https://kairos.trade"
+repository-code: "https://github.com/kairoslive/kairos-api-quickstart"
+url: "https://docs.kairos.trade"
+abstract: >-
+  A minimal, verified walkthrough of the Kairos prediction-market API: authenticate with
+  an API key, find a market on the anonymous market-data tier, place a limit order, poll
+  it to a terminal state, and cancel it. Includes runnable Python and TypeScript examples
+  and a machine-readable API contract for AI coding assistants.
+keywords:
+  - prediction markets
+  - trading api
+  - polymarket
+  - kalshi
+  - order execution
+license: MIT

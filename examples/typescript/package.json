@@ -1,0 +1,17 @@
+{
+  "name": "kairos-quickstart",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Find a market, place a limit order, poll it, cancel it.",
+  "scripts": {
+    "quickstart": "tsx quickstart.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": { "node": ">=20.11" },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

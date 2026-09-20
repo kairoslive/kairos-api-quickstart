@@ -1,0 +1,47 @@
+# Proves this repo still describes the real API. Runs daily, so "verified" is a
+# statement about today, not about the day it was written.
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  contract:
+    name: docs match the published OpenAPI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Fetches app.kairos.trade/openapi/kairos.json and re-derives every factual
+      # claim in README.md, AGENTS.md and docs/ from it.
+      - run: python scripts/verify_contract.py
+
+  examples:
+    name: examples run against the live API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r examples/python/requirements.txt
+      # --dry-run does every read-only step against md.kairos.trade (anonymous tier)
+      # and stops before submitting. No credentials, no orders.
+      - run: python examples/python/quickstart.py --dry-run
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install
+        working-directory: examples/typescript
+      - run: npx tsc --noEmit
+        working-directory: examples/typescript
+      - run: npm run quickstart -- --dry-run
+        working-directory: examples/typescript
